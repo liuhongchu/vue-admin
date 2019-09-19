@@ -1,22 +1,22 @@
 <template>
   <div class="login-container">
-    <el-form :model="ruleForm2" :rules="rules2"
+    <el-form :model="loginForm" :rules="rules"
              status-icon
-             ref="ruleForm2"
+             ref="loginForm"
              label-position="left"
              label-width="0px"
              class="demo-ruleForm login-page">
       <h3 class="title" style="text-align:center">系统登录</h3>
       <el-form-item prop="username">
         <el-input type="text"
-                  v-model="ruleForm2.username"
+                  v-model="loginForm.username"
                   auto-complete="off"
                   placeholder="用户名"
         ></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input type="password"
-                  v-model="ruleForm2.password"
+                  v-model="loginForm.password"
                   auto-complete="off"
                   placeholder="密码"
         ></el-input>
@@ -38,11 +38,11 @@
     data() {
       return {
         logining: false,
-        ruleForm2: {
+        loginForm: {
           username: 'admin',
           password: '123456',
         },
-        rules2: {
+        rules: {
           username: [{required: true, message: 'please enter your account', trigger: 'blur'}],
           password: [{required: true, message: 'enter your password', trigger: 'blur'}]
         },
@@ -51,13 +51,13 @@
     },
     methods: {
       handleSubmit(event) {
-        this.$refs.ruleForm2.validate((valid) => {
+        this.$refs.loginForm.validate((valid) => {
           if (valid) {
             this.logining = true;
-            if (this.ruleForm2.username === 'admin' &&
-              this.ruleForm2.password === '123456') {
+            if (this.loginForm.username === 'admin' &&
+              this.loginForm.password === '123456') {
               this.logining = false;
-              sessionStorage.setItem('user', this.ruleForm2.username);
+              sessionStorage.setItem('user', this.loginForm.username);
               this.$router.push({path: '/home'});
             } else {
               this.logining = false;
